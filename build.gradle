@@ -1,0 +1,48 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.12.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'io.github.kk17'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+ext {
+	springCloudVersion = 'Edgware.SR3'
+}
+
+dependencies {
+	compile('org.springframework.cloud:spring-cloud-starter-feign') {
+		exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter-netflix-ribbon'
+		exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter-netflix-archaius'
+		exclude group: 'io.github.openfeign', module: 'feign-hystri'
+	}
+	compile('org.codehaus.groovy:groovy')
+	compile 'io.github.openfeign:feign-okhttp:9.5.0'
+	compile 'io.github.openfeign:feign-okhttp:9.5.0'
+	compile 'io.github.openfeign.form:feign-form-spring:3.3.0'
+	compile 'org.springframework:spring-webmvc'
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}

@@ -1,0 +1,11 @@
+ribbon:
+  eureka:
+   enabled: false
+feign:
+  okhttp:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
